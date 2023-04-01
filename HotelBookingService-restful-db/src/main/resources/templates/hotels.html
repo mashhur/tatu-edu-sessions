@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Hotels!</title>
+</head>
+<body>
+  <div style="text-align: center;">
+    <h1>Hotels Page!</h1>
+      <!--<ul>
+          <li>Inter Continental</li>
+          <li>Sheraton</li>
+      </ul>-->
+
+      <div th:switch="${hotels}">
+          <h2 th:case="null">No hotel yet!</h2>
+          <div th:case="*">
+              <h2>Available Hotels</h2>
+              <table style="margin-left: auto; margin-right: auto;">
+                  <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="hotel : ${hotels}">
+                      <td th:text="${hotel.key}"></td>
+                      <td th:text="${hotel.value}"></td>
+                      <td><a th:href="@{/edit/{id}(id=${hotel.key})}">Edit</a></td>
+                      <td><a th:href="@{/delete/{id}(id=${hotel.key})}">Delete</a></td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+          <p><a href="/add-hotel">Add a new hotel</a></p>
+      </div>
+  </div>
+</body>
+</html>
